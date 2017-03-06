@@ -1,0 +1,21 @@
+/*.row * {
+    min-height: 50px;
+    border: 1px solid #0088cc;
+    background: #eee;
+}﻿ */
+html { 
+	overflow-x: hidden; 
+	overflow-y: hidden;
+}
+.verticalCenter {
+    margin-top: 40vh;
+}
+.div-answer {
+	display: none;
+}
+.div-answer	p {
+	font: bold 17px arial;
+}
+.div-answer span {
+	font: 20px arial;
+}

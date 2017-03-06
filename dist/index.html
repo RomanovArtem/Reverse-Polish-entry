@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Инфиксная нотация</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-3"></div>
+      <div class="col-xs-6 verticalCenter">
+        <div class="panel panel-info">
+          <div class="panel-heading text-center">Инфиксная нотация</div>
+          <div class="panel-body">
+          <form role="search" id="myform">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Введите выражение" autofocus="autofocus" id="inputString">
+              </div>
+              <button type="button" class="btn btn-info text-center center-block" onclick="inputCheck();">Отправить</button>
+              </form>
+          </div>
+        </div>
+        <div class="div-answer">
+            <p>Постфиксная нотация: <span id="ansver"></span></p>
+          </div>
+      </div>
+      <div class="col-xs-3"></div>
+    </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

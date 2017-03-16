@@ -25,88 +25,88 @@ function inputCheck() {
 function Conver(inputString) {
 	var numbersStack = [];
 	var operatorsStack = [];
-	var lastElement = "";// последний элемент в стеке
+	var lastElement = [];
 
 	var string = (inputString + " $").split(" ");
 	var status = 2;
 				//0 - преобразование невыполнено, ошибка; 
 				//1 - преобразование выполнено успешно; 
 				//2 - преобразование в процессе
-	
 	var i = 0;
 
 	while(status == 2) {
-		if ($.isNumeric(string[i])) { // если число
+		if ($.isNumeric(string[i])) { 
 			numbersStack.push(string[i]);
 			i++;
 		}
-		if (string[i] == "+" || string[i] == "-") {  // если - или +
-			if (lastElement.length == 0 || lastElement == "(") {
+		if (string[i] == "+" || string[i] == "-") {  
+			if (lastElement.length == 0 || lastElement[lastElement.length - 1] == "(") {
 				operatorsStack.push(string[i]);
-				lastElement = string[i];
+				lastElement.push(string[i]);
 				i++;
-			}
-			else if (lastElement == "+" || lastElement == "-" || lastElement == "*" || lastElement == "/") {
-				operatorsStack.pop(lastElement);
-				numbersStack.push(lastElement);
-				lastElement = operatorsStack;
+			}//
+			else if (lastElement[lastElement.length - 1] == "+" || lastElement[lastElement.length - 1] == "-" || lastElement[lastElement.length - 1] == "*" || lastElement[lastElement.length - 1] == "/") {
+				operatorsStack.pop();
+				numbersStack.push(lastElement[lastElement.length - 1]);
+				lastElement.pop();
 			}
 		}
-		else if (string[i] == "*" || string[i] == "/") {  //если * или /
-			if (lastElement.length == 0 || lastElement == "(" || lastElement == "+" || lastElement == "-") {
+		else if (string[i] == "*" || string[i] == "/") {  
+			if (lastElement.length == 0 || lastElement[lastElement.length - 1] == "(" || lastElement[lastElement.length - 1] == "+" || lastElement[lastElement.length - 1] == "-") {
 				operatorsStack.push(string[i]);
-				lastElement = string[i];
+				lastElement.push(string[i]);
 				i++;
 			}
-			else if (lastElement == "*" || lastElement == "/") {
-				operatorsStack.pop(lastElement);
-				numbersStack.push(lastElement);
-				lastElement = operatorsStack;
+			else if (lastElement[lastElement.length - 1] == "*" || lastElement[lastElement.length - 1] == "/") {
+				operatorsStack.pop();
+				numbersStack.push(lastElement[lastElement.length - 1
+					]);
+				lastElement.pop();
 			}
 		}
-		else if (string[i] == "(") { //если на стрелке открывающая скобка, то добавляем её в стек 
-				lastElement = string[i];
+		else if (string[i] == "(") { 
 				operatorsStack.push(string[i]);
+				lastElement.push(string[i]);
 				i++;
 		} 
-		else if (string[i] == ")") {  //если на стрелке закрывающая скобка
+		else if (string[i] == ")") {  
 			if (lastElement.length == 0) {
-				status = 0;   // если на стрелке закрывающая скобка, а в стеке нет элементов - изменяем стутус на 0 - ошибка
+				status = 0;   
 			}
-			else if (lastElement == "+" || lastElement == "-" || lastElement == "*" || lastElement == "/") {
-				operatorsStack.pop(lastElement);
-				numbersStack.push(lastElement);
-				lastElement = operatorsStack;
-			}
-			else if (lastElement == "(") {
+			else if (lastElement[lastElement.length - 1] == "+" || lastElement[lastElement.length - 1] == "-" || lastElement[lastElement.length - 1] == "*" || lastElement[lastElement.length - 1] == "/") {
 				operatorsStack.pop();
-				lastElement = "";
+				numbersStack.push(lastElement[lastElement.length - 1]);
+				lastElement.pop();
+			}
+			else if (lastElement[lastElement.length - 1] == "(") {
+				operatorsStack.pop();
+				lastElement.pop();
 				i++;
 			}
 		}
-		else if (string[i] = "$") { //если последний элемент
+		else if (string[i] = "$") { 
 			if (lastElement.length == 0) {
-				status = 1; //преобразование из инфиксной нотации в постфиксную завершено
+				status = 1; 
 			}
-			else if (lastElement == "+" || lastElement == "-" || lastElement == "*" || lastElement == "/") {
+			else if (lastElement[lastElement.length - 1] == "+" || lastElement[lastElement.length - 1] == "-" || lastElement[lastElement.length - 1] == "*" || lastElement[lastElement.length - 1] == "/") {
 				operatorsStack.pop();
-				numbersStack.push(lastElement);
-				lastElement = "";
+				numbersStack.push(lastElement[lastElement.length - 1]);
+				lastElement.pop();
 			}
-			else if (lastElement == "(") {
-				status = 0; //// если на стрелке последний вагон, а в стеке есть открывающая скобка - ошибка
+			else if (lastElement[lastElement.length - 1] == "(") {
+				status = 0; 
+				alert ('ошибка!');
 			}
 		}
 		else {
-			status = 0; // неизвестный символ
+			status = 0; 
+			alert ('ошибка!');
 		}
-
 	}
 
 	if (status == 1) {
 		var post = numbersStack.toString();
 		post = post.replace(/,/g, " ");
-		//alert(post);
 		 $("#ansver").text(post); 
 	}
 }
